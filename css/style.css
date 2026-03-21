@@ -1,0 +1,276 @@
+/* ============================================================
+   RESET & ROOT
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #050b1a;
+  --cyan: #00d4ff;
+  --cyan-dim: rgba(0, 212, 255, 0.15);
+  --white: #f0f4ff;
+  --muted: rgba(240, 244, 255, 0.45);
+  --eye-bg: #0d1a30;
+  --eye-border: rgba(0, 212, 255, 0.3);
+  --pupil: #001020;
+  --pupil-shine: #00d4ff;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  animation: fadeInBody 1s ease forwards;
+}
+
+/* ============================================================
+   FADE IN / OUT TRANSITIONS
+   ============================================================ */
+@keyframes fadeInBody {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+body.fade-out {
+  animation: fadeOutBody 0.6s ease forwards;
+}
+
+@keyframes fadeOutBody {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-16px); }
+}
+
+/* ============================================================
+   BACKGROUND ORBS
+   ============================================================ */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 8s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.12), transparent 70%);
+  top: -120px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(100, 60, 255, 0.14), transparent 70%);
+  bottom: -80px;
+  right: -80px;
+  animation-delay: -3s;
+}
+
+.orb-3 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.07), transparent 70%);
+  top: 50%;
+  left: 55%;
+  animation-delay: -5s;
+}
+
+@keyframes orbFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(20px, 30px) scale(1.06); }
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.landing-container {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+}
+
+/* ============================================================
+   INTRO TEXT
+   ============================================================ */
+.intro {
+  text-align: center;
+  animation: slideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.greeting {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--white) 40%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   EYES
+   ============================================================ */
+.eyes-container {
+  display: flex;
+  gap: 48px;
+  animation: slideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+.eye {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--eye-bg);
+  border: 2px solid var(--eye-border);
+  box-shadow:
+    0 0 30px rgba(0, 212, 255, 0.1),
+    inset 0 0 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.eye:hover {
+  box-shadow:
+    0 0 50px rgba(0, 212, 255, 0.25),
+    inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.pupil {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #0a2030, var(--pupil));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+.pupil-inner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--pupil-shine), rgba(0, 212, 255, 0.3));
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+}
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta-area {
+  text-align: center;
+  animation: slideUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+}
+
+.cta-hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+  letter-spacing: 0.08em;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  border-radius: 50px;
+  background: rgba(0, 212, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cta-button:hover {
+  border-color: rgba(0, 212, 255, 0.7);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-arrow {
+  position: relative;
+  z-index: 1;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover .btn-arrow {
+  transform: translateX(4px);
+}
