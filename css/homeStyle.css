@@ -715,6 +715,166 @@ body.fade-out {
   color: rgba(240, 244, 255, 0.6);
 }
 
+.achievement-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ============================================================
+   VIEW CERTIFICATE BUTTON
+   ============================================================ */
+.view-cert-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  background: rgba(0, 212, 255, 0.06);
+  color: #7ee8ff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.view-cert-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(100, 60, 255, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.view-cert-btn:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2), 0 0 30px rgba(0, 212, 255, 0.08);
+  color: #b0f0ff;
+}
+
+.view-cert-btn:hover::before {
+  opacity: 1;
+}
+
+.view-cert-btn:active {
+  transform: translateY(0);
+}
+
+.view-cert-btn svg {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   CERTIFICATE LIGHTBOX
+   ============================================================ */
+.cert-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 0.4s;
+}
+
+.cert-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cert-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 11, 26, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.cert-lightbox-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cert-lightbox.active .cert-lightbox-content {
+  transform: scale(1) translateY(0);
+}
+
+.cert-lightbox-close {
+  position: absolute;
+  top: -50px;
+  right: -10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.cert-lightbox-close:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.cert-lightbox-img-wrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(0, 212, 255, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.cert-lightbox-img {
+  display: block;
+  max-width: 85vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.cert-lightbox-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
 /* ============================================================
    PROFILE LINKS
    ============================================================ */
